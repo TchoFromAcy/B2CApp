@@ -3,9 +3,10 @@
  * needed for your application.
  */
 Ext.application({
-    name: 'MyApp',
+    name: 'B2CApp',
+    extend: 'B2CApp.Application',  // <<== added
 
-    launch: function () {
-        Ext.Msg.alert('Hello Ext JS', 'Hello! Welcome to Ext JS.');
-    }
+    requires: [
+        'B2CApp.*'   // tell Cmd to include all app classes
+    ]
 });

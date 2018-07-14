@@ -1,6 +1,6 @@
 {
-    "name": "MyApp",
-    "namespace": "MyApp",
+    "name": "B2CApp",
+    "namespace": "B2CApp",
     "version": "1.0.0.0",
     "framework": "ext",
     "toolkit": "modern",
