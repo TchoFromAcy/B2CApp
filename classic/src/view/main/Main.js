@@ -15,7 +15,8 @@ Ext.define('B2CApp.view.main.Main', {
 
         'B2CApp.view.main.MainController',
         'B2CApp.view.main.MainModel',
-        'B2CApp.view.main.List'
+        'B2CApp.view.main.List',
+        'B2CApp.view.main.TeamComposer'
     ],
 
     controller: 'main',
@@ -76,13 +77,19 @@ Ext.define('B2CApp.view.main.Main', {
     },
 
     items: [{
-        title: 'Home',
+        title: 'Inscrits',
         iconCls: 'fa-home',
+        layout:'fit',
         // The following grid shares a store with the classic version's grid as well!
         items: [{
-            xtype: 'mainlist'
+            xtype: 'mainlist',
+
         }]
-    }, {
+    },
+        { title: 'Composition des équipes',
+            iconCls: 'fa-users',
+            xtype: 'teamcomposer',}
+        /*{
         title: 'Users',
         iconCls: 'fa-user',
         bind: {
@@ -100,5 +107,5 @@ Ext.define('B2CApp.view.main.Main', {
         bind: {
             html: '{loremIpsum}'
         }
-    }]
+    }*/]
 });

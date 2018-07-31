@@ -5,23 +5,37 @@ Ext.define('B2CApp.view.main.List', {
     extend: 'Ext.grid.Panel',
     xtype: 'mainlist',
 
-    requires: [
-        'B2CApp.store.Personnel'
-    ],
+    title: 'Liste des inscrits',
 
-    title: 'Personnel',
-
-    store: {
-        type: 'personnel'
+    store: 'B2CInscrits',
+    collapsible:true,
+    selModel: {
+        type: 'checkboxmodel',
+        checkOnly: true
     },
 
+width:'100%',
     columns: [
-        { text: 'Name',  dataIndex: 'name' },
-        { text: 'Email', dataIndex: 'email', flex: 1 },
-        { text: 'Phone', dataIndex: 'phone', flex: 1 }
-    ],
+        { text: 'Nom',  dataIndex: 'nom', },
+        { text: 'Prénom',  dataIndex: 'prenom' },
+        { text: 'email',  dataIndex: 'email' },
+        { text: 'Statut',  dataIndex: 'type', renderer: function(rec){
 
+
+        return rec;
+        }
+        },
+        { text: 'Club',  dataIndex: 'club',width:300 },
+        { text: 'Dob',  dataIndex: 'dob' , renderer: function(val){
+               return (Ext.Date.format(val, 'd/m/Y'));
+
+            }},
+        {text:'poste', dataIndex:'poste'},
+        {text:'Sexe',dataIndex:'sexe'}
+
+    ],
+    scrollable:true,
     listeners: {
-        select: 'onItemSelected'
+       // select: 'onItemSelected'
     }
 });

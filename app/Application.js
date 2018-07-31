@@ -14,13 +14,21 @@ Ext.define('B2CApp.Application', {
             quickTips: true
         }
     },
-
+    requires:[
+        'B2CApp.proxy.Rest'
+    ],
     stores: [
-        // TODO: add global / shared stores here
+        'B2CApp.store.Inscrits'
+    ],
+    models:[
+        'B2CApp.model.Inscrit'
+
     ],
 
     launch: function () {
         // TODO - Launch the application
+        console.log(this, B2CApp.getApplication());
+
     },
 
     onAppUpdate: function () {

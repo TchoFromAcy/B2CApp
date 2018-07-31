@@ -31,7 +31,7 @@ Ext.define('B2CApp.view.main.Main', {
 
     items: [
         {
-            title: 'Home',
+            title: 'Inscrits',
             iconCls: 'x-fa fa-home',
             layout: 'fit',
             // The following grid shares a store with the classic version's grid as well!
@@ -39,7 +39,7 @@ Ext.define('B2CApp.view.main.Main', {
                 xtype: 'mainlist'
             }]
         },{
-            title: 'Users',
+            title: 'Inscrits au tournoi',
             iconCls: 'x-fa fa-user',
             bind: {
                 html: '{loremIpsum}'
