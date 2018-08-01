@@ -7,14 +7,21 @@ Ext.define('B2CApp.store.Base', {
     APICall:'',
     proxy: 'APIRest',
     autoLoad:true,
+    autoSync:true,
     listeners: {
         beforeload: function () {
 
             this.getProxy().setExtraParams({APICall:this.APICall})
 
 
-        }, load:function(){
-            console.log(arguments);
+        }, update:function(store, rec, operation){
+console.log(rec, operation);
+
+if(operation!=='commit'){
+    rec.commit();
+    store.sync();
+    rec.save();
+}
 
         }
 

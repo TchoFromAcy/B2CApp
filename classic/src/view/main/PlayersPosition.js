@@ -11,7 +11,7 @@ Ext.define('B2CApp.view.main.PlayersPosition', {
     listeners:{
 
     },
-
+    bodyPadding:'0 20',
     columns:[
 
         { text: 'Nom',  dataIndex: 'nom', },
@@ -24,7 +24,7 @@ Ext.define('B2CApp.view.main.PlayersPosition', {
     ],
     setData:function(grid){
         var store=Ext.getStore('B2CInscrits');
-        console.log(store);
+
 var data =Ext.Array.filter( store.getData().items,function(it, index) {
 var poste=it.get('poste').split(',');
 
@@ -34,7 +34,8 @@ var poste=it.get('poste').split(',');
 
 });
 
-grid.setTitle(grid.getPosteName()+ '('+data.length+')')
+
+grid.getHeader().setTitle(grid.getPosteName()+ ' ('+data.length+')')
         grid.getStore().setData(data);
     },
     getPosteName:function(){

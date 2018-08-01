@@ -18,7 +18,9 @@ Ext.define('B2CApp.Application', {
         'B2CApp.proxy.Rest'
     ],
     stores: [
-        'B2CApp.store.Inscrits'
+        'B2CApp.store.Inscrits',
+        'B2CApp.store.Teams',
+        'B2CApp.store.Poule'
     ],
     models:[
         'B2CApp.model.Inscrit'

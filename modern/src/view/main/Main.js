@@ -13,7 +13,7 @@ Ext.define('B2CApp.view.main.Main', {
         'Ext.MessageBox',
 
         'B2CApp.view.main.MainController',
-        'B2CApp.view.main.MainModel',
+       // 'B2CApp.view.main.MainModel',
         'B2CApp.view.main.List'
     ],
 

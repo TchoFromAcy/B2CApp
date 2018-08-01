@@ -13,10 +13,7 @@ Ext.define('B2CApp.view.main.Main', {
         'Ext.plugin.Viewport',
         'Ext.window.MessageBox',
 
-        'B2CApp.view.main.MainController',
-        'B2CApp.view.main.MainModel',
-        'B2CApp.view.main.List',
-        'B2CApp.view.main.TeamComposer'
+        'B2CApp.view.main.*'
     ],
 
     controller: 'main',
@@ -24,7 +21,7 @@ Ext.define('B2CApp.view.main.Main', {
 
     ui: 'navigation',
 
-    tabBarHeaderPosition: 1,
+   // tabBarHeaderPosition: 1,
     titleRotation: 0,
     tabRotation: 0,
 
@@ -34,7 +31,7 @@ Ext.define('B2CApp.view.main.Main', {
         },
         title: {
             bind: {
-                text: '{name}'
+                text: 'Bornes to Catch'
             },
             flex: 0
         },
@@ -54,7 +51,7 @@ Ext.define('B2CApp.view.main.Main', {
             headerPosition: 'top'
         },
         wide: {
-            headerPosition: 'left'
+            headerPosition: 'top'
         }
     },
 
@@ -88,7 +85,15 @@ Ext.define('B2CApp.view.main.Main', {
     },
         { title: 'Composition des équipes',
             iconCls: 'fa-users',
-            xtype: 'teamcomposer',}
+
+            // The following grid shares a store with the classic version's grid as well!
+          //  items: [{
+                xtype: 'teamcomposer',
+
+            //}],
+
+
+        }
         /*{
         title: 'Users',
         iconCls: 'fa-user',
