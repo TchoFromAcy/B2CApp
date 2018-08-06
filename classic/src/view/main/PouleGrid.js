@@ -3,17 +3,36 @@
  */
 Ext.define('B2CApp.view.main.PouleGrid', {
     extend: 'Ext.grid.Panel',
-    store:'B2Cpoule',
-
+   // store:'B2Cpoule',
+    controller:'main',
+    reference:'poulegrid',
     xtype: 'poulegrid',
+    tbar:{
+        items:[
+            {text:'Ajouter',
+                iconCls: 'fa fa-plus',
+
+            }, {text:'Supprimer',
+                iconCls: 'fa fa-trash',
+                disabled:true,
+
+
+            }
+
+        ]
+
+
+    },
+    selModel: {
+        type: 'checkboxmodel',
+        checkOnly: true,
+
+    },
     plugins: [{
         ptype: 'rowediting',
         clicksToMoveEditor: 1,
         autoCancel: false
     }],
 
-    columns:[{dataIndex:'nom', text:'Libellé',  editor: {
-            allowBlank: false,
 
-        }}]
 });

@@ -3,25 +3,35 @@
  */
 Ext.define('B2CApp.store.Base', {
     extend: 'Ext.data.Store',
-    alias:'store.base',
-    APICall:'',
+    alias: 'store.base',
+    APICall: '',
     proxy: 'APIRest',
-    autoLoad:true,
-    autoSync:true,
+    autoLoad: true,
+    //   autoSync:true,
     listeners: {
         beforeload: function () {
 
-            this.getProxy().setExtraParams({APICall:this.APICall})
+            this.getProxy().setExtraParams({APICall: this.APICall})
 
 
-        }, update:function(store, rec, operation){
-console.log(rec, operation);
+        }, update: function (store, rec, operation) {
+            console.log(rec, operation);
 
-if(operation!=='commit'){
-    rec.commit();
-    store.sync();
-    rec.save();
-}
+            if (operation !== 'commit') {
+
+                rec.save();
+            }
+
+        },
+        remove: function (store, rec, operation) {
+            console.log(rec, operation);
+
+            if (operation !== 'commit') {
+
+                Ext.Array.each(rec, function (it) {
+                    it.erase();
+                });
+            }
 
         }
 

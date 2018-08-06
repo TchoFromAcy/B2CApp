@@ -8,5 +8,5 @@ Ext.define('B2CApp.store.Poule', {
     proxy: 'APIRest',
     APICall:'getPoules',
     model:'B2CApp.model.Poule',
-    storeId:'B2Cpoule'
+    storeId:'B2CPoule'
 });

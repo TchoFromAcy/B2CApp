@@ -1,6 +1,10 @@
 Ext.define('B2CApp.model.Inscrit', {
     extend: 'Ext.data.Model',
 idProperty:'id_inscription',
+    proxy:{type: 'APIRest',url:'http://tournoi.localhost/restAPI/Tournoi',api: {
+            create  : 'http://tournoi.localhost/restAPI/B2cPoule/new',
+
+        }},
     fields: [
         { name: 'id_inscription', type: 'int' },
         { name: 'nom', type: 'string' },
@@ -15,7 +19,8 @@ idProperty:'id_inscription',
 
             return '<em class="fa fa-2x fa-'+(parseInt(value)==2?'male':'female')+'"></em>';
 
-            }}
+            }},
+        {name:'id_team', type:'int'}
 
 
     ]
