@@ -5,7 +5,7 @@ Ext.define('B2CApp.proxy.Rest', {
 
     extend:'Ext.data.proxy.Rest',
     alias:'proxy.APIRest',
-    url: 'http://tournoi.localhost/restAPI',
+    url: B2CApp.class.Globals.APIUrl,
     format: 'json',
     //autoSync:true,
 

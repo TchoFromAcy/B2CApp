@@ -4,8 +4,8 @@
 Ext.define('B2CApp.model.Poule', {
     extend: 'Ext.data.Model',
     idProperty:'id_poule',
-    proxy:{type: 'APIRest',url:'http://tournoi.localhost/restAPI/B2cPoule',api: {
-            create  : 'http://tournoi.localhost/restAPI/B2cPoule/new',
+    proxy:{type: 'APIRest',url:B2CApp.class.Globals.APIUrl+'B2cPoule',api: {
+            create  : B2CApp.class.Globals.APIUrl+'B2cPoule/new',
 
         }},
 fields:[

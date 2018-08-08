@@ -4,8 +4,8 @@
 Ext.define('B2CApp.model.Team', {
     extend: 'Ext.data.Model',
     idProperty:'id_team',
-    proxy:{type: 'APIRest',url:'http://tournoi.localhost/restAPI/B2cTeams',api: {
-            create  : 'http://tournoi.localhost/restAPI/B2cTeams/new',
+    proxy:{type: 'APIRest',url:B2CApp.class.Globals.APIUrl+'B2cTeams',api: {
+            create  : B2CApp.class.Globals.APIUrl+'B2cTeams/new',
 
         }},
     fields:[

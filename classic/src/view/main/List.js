@@ -30,8 +30,17 @@ width:'100%',
                return (Ext.Date.format(val, 'd/m/Y'));
 
             }},
+
+        {text:'Sexe',dataIndex:'sexe', renderer:function(val){
+
+
+                    return '<em class="fa fa-2x fa-'+(parseInt(val)==2?'male':'female')+'"></em>';
+
+
+            }},
         {text:'poste', dataIndex:'poste'},
-        {text:'Sexe',dataIndex:'sexe'}
+        {text:'Physique', dataIndex:'physique'},
+        {text:'Tactique', dataIndex:'tactique'},
 
     ],
     scrollable:true,

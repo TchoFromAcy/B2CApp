@@ -41,35 +41,59 @@ Ext.define('B2CApp.view.main.MainController', {
             }
 
         },
-        'teamcomposer':{
+        'teamcomposer': {
 
-            activate:{fn:'setGridData'
+            activate: {
+                fn: 'setGridData'
             },
-            render:function(){
-                
 
-                Ext.getStore('B2CTeams').sort('nom','asc');
-                Ext.getStore('B2CTeams').getData().each(function(rec){
+            render: function () {
 
-                    var grid=Ext.create({xtype:'playersposition', isTeam:   rec.get('id_team'), collapsible:true, title:rec.get('nom')});
-    Ext.getCmp('playerCenter').add(grid)
+                var me = this;
+                Ext.getStore('B2CTeams').on('update', me.teamStoreUpdate, this);
 
-                });
+                Ext.getStore('B2CTeams').sort('nom', 'asc');
+                Ext.getStore('B2CTeams').getData().each(function (rec) {
+
+                    var grid = Ext.create({
+                        xtype: 'playersposition',
+                        isTeam: rec.get('id_team'),
+                        collapsible: true,
+                        id: 'teamComponent_' + rec.get('id_team')
+
+                    });
+                    grid.getStore().on({
+                        update: {fn: me.calculateTeamValue, args: [grid]},
+                        add: {fn: me.calculateTeamValue, args: [grid]},
+                        remove: {fn: me.calculateTeamValue, args: [grid]},
+                    });
+
+                    Ext.getCmp('playerCenter').add(grid)
+                    grid.fireEvent('update', [grid]);
+                    this.calculateTeamValue(grid, grid.getStore());
+
+                }, this);
             }
 
         }
 
     },
-setGridData:function (grid) {
+    setGridData: function (grid) {
 
-    Ext.Array.each(Ext.ComponentQuery.query('playersposition'), function(grid){
-        grid.setData(grid);
-        console.log('update', grid);
-    })
+        Ext.Array.each(Ext.ComponentQuery.query('playersposition'), function (grid) {
+
+            grid.getStore().un({update: {fn: this.setGridData, scope: this}}).on({
+                update: {
+                    fn: this.setGridData,
+                    scope: this
+                }
+            });
+
+            grid.setData()
+        }, this)
 
 
-
-},
+    },
     openGridView: function (storeId, btn) {
 
         var cols = [{
@@ -99,7 +123,6 @@ setGridData:function (grid) {
             }
         });
 
-        console.log(cols);
         var win = Ext.create('Ext.window.Window', {
             title: btn.getText(),
 
@@ -151,12 +174,72 @@ setGridData:function (grid) {
         var ref = this.lookupReference(reference);
         if (!ref) return;
 
-        console.log(ref, ref.getSelection());
-        Ext.MessageBox.confirm('Supprimer la sélection', 'Voulez-vous eupprimer la sélection ?', function (btn) {
+        Ext.MessageBox.confirm('Supprimer la sélection', 'Voulez-vous supprimer la sélection ?', function (btn) {
             if (btn !== 'yes') return;
             var store = ref.getStore();
             store.remove(ref.getSelection());
         });
+
+    },
+
+    calculateTeamValue: function (grid, store) {
+
+        grid.setData(grid);
+
+        var dataStats = {
+            handler: 0,
+            middle: 0,
+            deep: 0,
+            technique: 0,
+            physique: 0,
+            num: 0,
+            male: 0,
+            female: 0
+
+
+        }
+        store.getData().each(function (rec) {
+
+            var poste = rec.get('poste').split(',');
+
+            if (Ext.Array.indexOf(poste, '1') > -1) dataStats.handler++;
+            if (Ext.Array.indexOf(poste, '2') > -1) dataStats.middle++;
+            if (Ext.Array.indexOf(poste, '3') > -1) dataStats.deep++;
+
+            dataStats.physique += rec.get('physique');
+            dataStats.technique += rec.get('technique');
+            if (rec.get('sexe') === 1) dataStats.female++;
+            else dataStats.male++;
+
+            dataStats.num++;
+
+
+        });
+
+        dataStats.physique = dataStats.physique / dataStats.num;
+        dataStats.technique = dataStats.technique / dataStats.num;
+        var rec = Ext.getStore('B2CTeams').findRecord('id_team', grid.isTeam);
+
+
+        grid.setTitle(rec.get('nom') + '<div class="teamStats"><span><em class="fa fa-users"></em> ' + dataStats.num + '</span><span><em class="fa fa-male"></em> ' + dataStats.male + '</span>'+
+
+            '<span><em class="fa fa-female"></em> ' + dataStats.female + '</span>'
+            + '<span>H :  ' + dataStats.handler + '</span>'
+            + '<span>M :  ' + dataStats.middle + '</span>'
+            + '<span>D :  ' + dataStats.deep + '</span>'
+            + '<span>Phy. :  ' + dataStats.physique.toFixed(2) + '</span>'
+            + '<span>Tech. :  ' + dataStats.technique.toFixed(2) + '</span>'
+            +'</div>');
+
+    },
+
+    teamStoreUpdate: function (store, rec) {
+
+
+        var grid = Ext.getCmp('teamComponent_' + rec.get('id_team'));
+
+        this.calculateTeamValue(grid, grid.getStore());
+
 
     }
 });

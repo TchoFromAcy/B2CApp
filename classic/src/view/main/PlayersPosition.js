@@ -12,15 +12,33 @@ Ext.define('B2CApp.view.main.PlayersPosition', {
     listeners:{
 
     },
-    bodyPadding:'0 20',
+
     columns:[
 
         { text: 'Nom',  dataIndex: 'nom', },
         { text: 'Prénom',  dataIndex: 'prenom' },
         { text: 'Club',  dataIndex: 'club' },
-        { text: 'Physique',  dataIndex: 'physique' },
-        { text: 'Technique',  dataIndex: 'technique' },
-        { text: 'Sexe',  dataIndex: 'sexe' },
+        { text: 'Physique',  dataIndex: 'physique', editor:{
+            allowBlank:true,
+                xtype:'numberfield',
+                minValue:0,
+                maxValue:10
+
+            } },
+        { text: 'Technique',  dataIndex: 'technique',editor:{
+                allowBlank:true,
+                xtype:'numberfield',
+                minValue:0,
+                maxValue:10
+
+            }  },
+        { text: 'Sexe',  dataIndex: 'sexe',renderer:function(val){
+
+
+                return '<em class="fa fa-2x fa-'+(parseInt(val)==2?'male':'female')+'"></em>';
+
+
+            } },
         { text: 'Poste',  dataIndex: 'poste' },
         {text:'equipe', dataIndex:'id_team',editor: {
                 allowBlank: true,
@@ -50,24 +68,25 @@ Ext.define('B2CApp.view.main.PlayersPosition', {
     }],
     setData:function(grid){
         var store=Ext.getStore('B2CInscrits');
-
+console.log(this.isTeam)
 var data =Ext.Array.filter( store.getData().items,function(it, index) {
 
-    if(Ext.isEmpty(it.get('poste'))||it.get('id_team')>0&&!grid.isTeam)return false;
+    if(Ext.isEmpty(it.get('poste'))||it.get('id_team')>0&&!this.isTeam)return false;
 
-    if(!grid.isTeam) {
+    if(!this.isTeam) {
         var poste = it.get('poste').split(',');
 
 
-        return Ext.Array.indexOf(poste, grid.poste.toString()) > -1;
-    }else return(grid.isTeam===it.get('id_team'));
+        return Ext.Array.indexOf(poste, this.poste.toString()) > -1;
+    }else return(this.isTeam===it.get('id_team'));
 
 
-});
+}, this);
 
+        this.getStore().setData(data);
+        this.getStore().sort('nom','asc')
+if(!this.isTeam)this.getHeader().setTitle(this.getPosteName()+ ' ('+data.length+')');
 
-if(!grid.isTeam)grid.getHeader().setTitle(grid.getPosteName()+ ' ('+data.length+')')
-        grid.getStore().setData(data);
     },
     getPosteName:function(){
         return this.posteTitle;

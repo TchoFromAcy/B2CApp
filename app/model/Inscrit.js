@@ -1,8 +1,8 @@
 Ext.define('B2CApp.model.Inscrit', {
     extend: 'Ext.data.Model',
 idProperty:'id_inscription',
-    proxy:{type: 'APIRest',url:'http://tournoi.localhost/restAPI/Tournoi',api: {
-            create  : 'http://tournoi.localhost/restAPI/B2cPoule/new',
+    proxy:{type: 'APIRest',url:B2CApp.class.Globals.APIUrl+'Tournoi',api: {
+            create  : B2CApp.class.Globals.APIUrl+'Tournoi/new',
 
         }},
     fields: [
@@ -15,11 +15,7 @@ idProperty:'id_inscription',
         { name: 'dob', type: 'date',format:'Y-m-d'},
         {name:'physique', type:'int'},
         {name:'technique', type:'int'},
-        {name:'sexe', type:'string', convert:function(value){
-
-            return '<em class="fa fa-2x fa-'+(parseInt(value)==2?'male':'female')+'"></em>';
-
-            }},
+        {name:'sexe', type:'string'},
         {name:'id_team', type:'int'}
 
 

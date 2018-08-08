@@ -15,7 +15,8 @@ Ext.define('B2CApp.Application', {
         }
     },
     requires:[
-        'B2CApp.proxy.Rest'
+        'B2CApp.proxy.Rest',
+        'B2CApp.class.Globals',
     ],
     stores: [
         'B2CApp.store.Inscrits',
@@ -26,10 +27,10 @@ Ext.define('B2CApp.Application', {
         'B2CApp.model.Inscrit'
 
     ],
-
+APIUrl:'http://tournoi.localhost/restAPI/',
     launch: function () {
         // TODO - Launch the application
-        console.log(this, B2CApp.getApplication());
+
 
     },
 
