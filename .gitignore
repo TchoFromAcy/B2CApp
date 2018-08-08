@@ -4,3 +4,4 @@ modern.json*
 .sencha
 /ext
 /.idea
+*.log
