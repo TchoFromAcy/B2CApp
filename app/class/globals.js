@@ -3,6 +3,6 @@
  */
 Ext.define('B2CApp.class.Globals', {
     singleton:true,
-    APIUrl:'http://tournoi.localhost/restAPI/',
+    APIUrl:'http://bornestocatch.dahultimate.com/restAPI/',
 
 });
