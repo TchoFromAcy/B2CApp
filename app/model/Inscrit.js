@@ -16,7 +16,16 @@ idProperty:'id_inscription',
         {name:'physique', type:'int'},
         {name:'technique', type:'int'},
         {name:'sexe', type:'string'},
-        {name:'id_team', type:'int'}
+        {name:'id_team', type:'int'},
+        {name:'payed', type:'int'},
+        {name:'party', type:'int'},
+        {name:'type', type:'int'},
+        {name:'confirm', type:'int'},
+        {name:'adulte', type:'int'},
+        {name:'enfant', type:'int'},
+        {name:'regime', type:'string'},
+        {name:'comment', type:'string'},
+
 
 
     ]

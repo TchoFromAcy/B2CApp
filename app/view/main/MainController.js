@@ -227,8 +227,8 @@ Ext.define('B2CApp.view.main.MainController', {
             + '<span>H :  ' + dataStats.handler + '</span>'
             + '<span>M :  ' + dataStats.middle + '</span>'
             + '<span>D :  ' + dataStats.deep + '</span>'
-            + '<span>Phy. :  ' + dataStats.physique.toFixed(2) + '</span>'
-            + '<span>Tech. :  ' + dataStats.technique.toFixed(2) + '</span>'
+            + '<span>Phy. :  ' + (isNaN(dataStats.physique)?0:dataStats.physique.toFixed(2)) + '</span>'
+            + '<span>Tech. :  ' + (isNaN(dataStats.technique)?0:dataStats.technique.toFixed(2)) + '</span>'
             +'</div>');
 
     },

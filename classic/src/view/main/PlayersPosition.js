@@ -71,7 +71,7 @@ Ext.define('B2CApp.view.main.PlayersPosition', {
 console.log(this.isTeam)
 var data =Ext.Array.filter( store.getData().items,function(it, index) {
 
-    if(Ext.isEmpty(it.get('poste'))||it.get('id_team')>0&&!this.isTeam)return false;
+    if(Ext.isEmpty(it.get('poste'))||it.get('id_team')>0&&!this.isTeam||it.get('confirm')!==1)return false;
 
     if(!this.isTeam) {
         var poste = it.get('poste').split(',');
