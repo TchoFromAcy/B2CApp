@@ -3,6 +3,12 @@
  */
 Ext.define('B2CApp.class.Globals', {
     singleton:true,
-    APIUrl:'http://bornestocatch.dahultimate.com/restAPI/',
+    siteURL:'http://bornestocatch.dahultimate.com',
+    APIUrl:'/restAPI/',
+    constructor:function(){
+        this.APIUrl=this.siteURL+'/restAPI/';
+
+}
+
 
 });

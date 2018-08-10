@@ -68,7 +68,7 @@ Ext.define('B2CApp.view.main.PlayersPosition', {
     }],
     setData:function(grid){
         var store=Ext.getStore('B2CInscrits');
-console.log(this.isTeam)
+
 var data =Ext.Array.filter( store.getData().items,function(it, index) {
 
     if(Ext.isEmpty(it.get('poste'))||it.get('id_team')>0&&!this.isTeam||it.get('confirm')!==1)return false;
@@ -84,7 +84,7 @@ var data =Ext.Array.filter( store.getData().items,function(it, index) {
 }, this);
 
         this.getStore().setData(data);
-        this.getStore().sort('nom','asc')
+
 if(!this.isTeam)this.getHeader().setTitle(this.getPosteName()+ ' ('+data.length+')');
 
     },

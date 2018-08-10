@@ -41,6 +41,15 @@ Ext.define('B2CApp.view.main.MainController', {
             }
 
         },
+
+        'mainlist':{
+            selectionchange:{
+                fn:'mainListSelectionChanged'
+
+            }
+
+        },
+
         'teamcomposer': {
 
             activate: {
@@ -48,6 +57,8 @@ Ext.define('B2CApp.view.main.MainController', {
             },
 
             render: function () {
+
+                Ext.getStore('B2CInscrits').sort('nom','asc');
 
                 var me = this;
                 Ext.getStore('B2CTeams').on('update', me.teamStoreUpdate, this);
@@ -241,5 +252,24 @@ Ext.define('B2CApp.view.main.MainController', {
         this.calculateTeamValue(grid, grid.getStore());
 
 
+    },
+
+    mainListSelectionChanged:function(grid, selection){
+
+        Ext.getCmp('btnExport').setDisabled(!selection.length);
+        if(!selection.lenth) return;
+
+    var params='';
+Ext.Array.each(selection, function(sel){
+   params+='&inscr[]='+sel.getId()
+
+});
+
+
+        Ext.getCmp('btnExport').setHref(B2CApp.class.Globals.siteURL+'/admin/ajax?apiCall=exportInscriptions&format=json'+params);
+
+
+
     }
+
 });

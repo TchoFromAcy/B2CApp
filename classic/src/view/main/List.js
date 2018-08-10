@@ -15,6 +15,11 @@ Ext.define('B2CApp.view.main.List', {
     },
 
     width: '100%',
+    tbar: {
+        items: [{text: 'Exporter la sélection', iconCls: 'fa fa-file-excel-o', id:'btnExport', href:'#', target:'_blank', disabled:true}]
+
+    },
+//B2CApp.class.Globals+'/admin/ajax?apiCall=exportInscriptions&format=json&inscr[]=168
     columns: [
         {text: 'Nom', dataIndex: 'nom',},
         {text: 'Prénom', dataIndex: 'prenom'},
